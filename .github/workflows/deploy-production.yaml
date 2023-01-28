@@ -23,10 +23,9 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
           repository: 1337eddy/tgo-backend/
           dockerfile: backend/Dockerfile
-          tags: latest
   
   build-and-deploy-front:
-    name: Build and Deploy Backend
+    name: Build and Deploy Frontend
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -39,4 +38,3 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
           repository: 1337eddy/tgo-frontend/
           dockerfile: frontend/Dockerfile
-          tags: latest
