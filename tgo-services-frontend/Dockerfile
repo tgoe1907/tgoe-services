@@ -6,7 +6,7 @@ WORKDIR /project
 RUN npm install -g @angular/cli@15
 
 RUN ls -l
-COPY package-lock.json ./
+COPY tgo-services-frontend/package-lock.json ./
 COPY package.json ./
 RUN npm ci
 
