@@ -19,8 +19,8 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v1
         with:
-          username: ${{ 1337eddy }}
-          password: ${{ Test }}
+          username: 1337eddy
+          password: Test
           repository: 1337eddy/tgo-backend/
           dockerfile: backend/Dockerfile
   
