@@ -10,6 +10,6 @@ COPY tgo-services-frontend/package-lock.json tgo-services-frontend/package.json 
 RUN npm ci
 
 
-COPY tgo-services-frontend/ .
+COPY . .
 CMD ["ng", "serve", "--host", "0.0.0.0"]
 
