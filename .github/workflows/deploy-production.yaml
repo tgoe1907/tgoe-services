@@ -21,7 +21,7 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-          repository: tgoe1907/tgo-backend/
+          repository: 1337eddy/tgo-backend/
           dockerfile: backend/Dockerfile
   
   build-and-deploy-front:
@@ -36,5 +36,5 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-          repository: tgoe1907/tgo-services-frontend/
-          dockerfile: frontend/Dockerfile
+          repository: 1337eddy/tgo-frontend/
+          dockerfile: tgo-services-frontend/Dockerfile
