@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "data.apps.DataConfig",
     "rest_framework",
+    'drf_yasg',
+    'drf_spectacular',
 ]
 
 MIDDLEWARE = [
@@ -124,3 +126,15 @@ STATIC_ROOT = BASE_DIR / "static"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'TGO Backend Services API',
+    'DESCRIPTION': 'API Service for TGO data',
+    'VERSION': '0.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+}
+
