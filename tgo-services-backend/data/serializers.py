@@ -1,18 +1,30 @@
 from rest_framework import serializers
-from .models import Person
+from .models import User
 
-class PersonSerializer(serializers.ModelSerializer):
-    id = serializers.IntegerField(read_only=True)
-    surename = serializers.CharField(max_length=50)
-    forname = serializers.CharField(max_length=50)
-    membership_number = serializers.CharField(required=False, max_length=30)
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'first_name', 'last_name', 'email', 'password', 'membership_number', 'date_joined']
+
+        extra_kwargs = {'password': {'write_only': True}}
+    
 
     def create(self, validated_data):
-        return Person.objects.create(**validated_data)
+        validated_data['username'] = validated_data['email']
+        password = validated_data.pop('password', None)
+        instance = self.Meta.model(**validated_data) #doesnt include password
 
-    def update(self, instance, validated_data):
-        instance.surename = validated_data.get('surename', instance.surename)
-        instance.lastname = validated_data.get('lastname', instance.lastname)
-        instance.membership_number = validated_data.get('membership_number', instance.membership_number)
+        if password is not None:
+            instance.set_password(password) #hashes password
         instance.save()
         return instance
+
+    def update(self, instance, validated_data):
+        password = None
+        if 'password' in validated_data:
+            password = validated_data.pop('password', None)
+        instance = super().update(instance, validated_data)
+        if password is not None:
+            instance.set_password(password)
+        instance.save()
+        return {'message': 'succesfull updated'}
