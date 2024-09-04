@@ -9,6 +9,7 @@ from rest_enumfield import EnumField
 
 class User(AbstractUser):
     membership_number = models.CharField(max_length=30, blank=True)
+    birthdate = models.DateField(max_length=8, null=True, blank=True)
 
 
     def __str__(self):
@@ -48,7 +49,7 @@ class TrainHour(models.Model):
     start_time = models.TimeField()
     end_time = models.TimeField()
     place = models.CharField(max_length=255)
-    note = models.TextField()
+    note = models.TextField(blank=True)
     group = models.ForeignKey(SportsGroup, on_delete=models.CASCADE)
     trainer = models.ForeignKey(Trainer, on_delete=models.CASCADE)
 

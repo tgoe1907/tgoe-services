@@ -4,9 +4,9 @@ from .models import User
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'first_name', 'last_name', 'email', 'password', 'membership_number', 'date_joined']
+        fields = ['id', 'first_name', 'last_name', 'email', 'password', 'membership_number', 'date_joined', 'birthdate']
 
-        extra_kwargs = {'password': {'write_only': True}}
+        extra_kwargs = {'password': {'write_only': True, 'required': False}}
     
 
     def create(self, validated_data):
@@ -28,3 +28,4 @@ class UserSerializer(serializers.ModelSerializer):
             instance.set_password(password)
         instance.save()
         return {'message': 'succesfull updated'}
+    

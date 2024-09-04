@@ -4,9 +4,11 @@ from .models import User
 from .serializers import UserSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import status, viewsets, filters
 from rest_framework.views import APIView
 from rest_framework.exceptions import AuthenticationFailed
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.decorators import action
 
 from datetime import datetime, timezone, timedelta
 import jwt
@@ -79,3 +81,18 @@ class LogoutUserView(APIView):
         response.data = {'message': 'successful'}
 
         return response
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    #permission_classes = [IsAuthenticated]
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['first_name', 'last_name', 'membership_number', 'email', 'id']
+
+    @action(detail=False, methods=['get'])
+    def get_emails(self, request, pk=None):
+        email = User.objects.values_list('email', flat=True)
+
+        return Response(email)
+    
+    
