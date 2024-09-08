@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import JsonResponse
-from .models import User
-from .serializers import UserSerializer
+from .models import *
+from .serializers import *
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status, viewsets, filters
@@ -95,4 +95,44 @@ class UserViewSet(viewsets.ModelViewSet):
 
         return Response(email)
     
+class TrainerViewSet(viewsets.ModelViewSet):
+    queryset = Trainer.objects.all()
+    serializer_class = TrainerSerializer
+    #permission_classes = []
+
+class DepartmentViewSet(viewsets.ModelViewSet):
+    queryset = Department.objects.all()
+    serializer_class = DepartmentSerializer
+    #permission_classes = []
+
+class SportsGroupViewSet(viewsets.ModelViewSet):
+    queryset = SportsGroup.objects.all()
+    serializer_class = SportsGroupSerializer
+    #permission_classes = []
     
+
+class MembershipViewSet(viewsets.ModelViewSet):
+    queryset = Membership.objects.all()
+    serializer_class = MembershipSerializer
+    #permission_classes = []
+
+
+class RegularTrainUnitViewSet(viewsets.ModelViewSet):
+    queryset = RegularTrainUnit.objects.all()
+    serializer_class = RegularTrainUnitSerializer
+    #permission_classes = []
+
+class TrainHourViewSet(viewsets.ModelViewSet):
+    queryset = TrainHour.objects.all()
+    serializer_class = TrainHourSerializer
+    #permission_classes = []
+
+
+class DepartmentLeaderShipViewSet(viewsets.ModelViewSet):
+    queryset = DepartmentLeaderShip.objects.all()
+    serializer_class = DepartmentLeadershipSerializer
+    #permission_classes = []
+
+class TrainHourParticipationViewSet(viewsets.ModelViewSet):
+    queryset = TrainHourParticipation.objects.all()
+    serializer_class = TrainHourParticipationSerializer

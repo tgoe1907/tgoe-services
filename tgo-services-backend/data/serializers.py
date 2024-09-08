@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User
+from .models import *
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -28,4 +28,43 @@ class UserSerializer(serializers.ModelSerializer):
             instance.set_password(password)
         instance.save()
         return {'message': 'succesfull updated'}
-    
+
+class TrainerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Trainer
+        fields = ['id', 'user', 'group']
+
+class SportsGroupSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SportsGroup
+        fields = ['id', 'name', 'active', 'department']
+
+class DepartmentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Department
+        fields = ['id', 'name']
+
+class MembershipSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Membership
+        fields = ['id', 'user', 'group']
+
+class RegularTrainUnitSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = RegularTrainUnit
+        fields = ['id', 'group', 'weekday', 'start_time', 'end_time', 'place']
+
+class TrainHourSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TrainHour
+        fields = ['id', 'date', 'start_time', 'end_time', 'place', 'note', 'group', 'trainer']
+
+class DepartmentLeadershipSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DepartmentLeaderShip
+        fields = ['id', 'user', 'department']
+
+class TrainHourParticipationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TrainHourParticipation
+        fields = ['id', 'user', 'hour']
