@@ -1,0 +1,1736 @@
+openapi: 3.0.3
+info:
+  title: TGO Backend Services API
+  version: 0.0.0
+  description: API Service for TGO data
+paths:
+  /api/department/:
+    get:
+      operationId: department_list
+      tags:
+      - department
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Department'
+          description: ''
+    post:
+      operationId: department_create
+      tags:
+      - department
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Department'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Department'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Department'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Department'
+          description: ''
+  /api/department/{id}/:
+    get:
+      operationId: department_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this department.
+        required: true
+      tags:
+      - department
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Department'
+          description: ''
+    put:
+      operationId: department_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this department.
+        required: true
+      tags:
+      - department
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Department'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Department'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Department'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Department'
+          description: ''
+    patch:
+      operationId: department_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this department.
+        required: true
+      tags:
+      - department
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedDepartment'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedDepartment'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedDepartment'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Department'
+          description: ''
+    delete:
+      operationId: department_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this department.
+        required: true
+      tags:
+      - department
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /api/departmentleadership/:
+    get:
+      operationId: departmentleadership_list
+      tags:
+      - departmentleadership
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DepartmentLeadership'
+          description: ''
+    post:
+      operationId: departmentleadership_create
+      tags:
+      - departmentleadership
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DepartmentLeadership'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/DepartmentLeadership'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/DepartmentLeadership'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DepartmentLeadership'
+          description: ''
+  /api/departmentleadership/{id}/:
+    get:
+      operationId: departmentleadership_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this department leader ship.
+        required: true
+      tags:
+      - departmentleadership
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DepartmentLeadership'
+          description: ''
+    put:
+      operationId: departmentleadership_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this department leader ship.
+        required: true
+      tags:
+      - departmentleadership
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DepartmentLeadership'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/DepartmentLeadership'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/DepartmentLeadership'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DepartmentLeadership'
+          description: ''
+    patch:
+      operationId: departmentleadership_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this department leader ship.
+        required: true
+      tags:
+      - departmentleadership
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedDepartmentLeadership'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedDepartmentLeadership'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedDepartmentLeadership'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DepartmentLeadership'
+          description: ''
+    delete:
+      operationId: departmentleadership_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this department leader ship.
+        required: true
+      tags:
+      - departmentleadership
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /api/membership/:
+    get:
+      operationId: membership_list
+      tags:
+      - membership
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Membership'
+          description: ''
+    post:
+      operationId: membership_create
+      tags:
+      - membership
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Membership'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Membership'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Membership'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Membership'
+          description: ''
+  /api/membership/{id}/:
+    get:
+      operationId: membership_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this membership.
+        required: true
+      tags:
+      - membership
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Membership'
+          description: ''
+    put:
+      operationId: membership_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this membership.
+        required: true
+      tags:
+      - membership
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Membership'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Membership'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Membership'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Membership'
+          description: ''
+    patch:
+      operationId: membership_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this membership.
+        required: true
+      tags:
+      - membership
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedMembership'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedMembership'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedMembership'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Membership'
+          description: ''
+    delete:
+      operationId: membership_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this membership.
+        required: true
+      tags:
+      - membership
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /api/regulartrainunit/:
+    get:
+      operationId: regulartrainunit_list
+      tags:
+      - regulartrainunit
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RegularTrainUnit'
+          description: ''
+    post:
+      operationId: regulartrainunit_create
+      tags:
+      - regulartrainunit
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegularTrainUnit'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/RegularTrainUnit'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/RegularTrainUnit'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegularTrainUnit'
+          description: ''
+  /api/regulartrainunit/{id}/:
+    get:
+      operationId: regulartrainunit_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this regular train unit.
+        required: true
+      tags:
+      - regulartrainunit
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegularTrainUnit'
+          description: ''
+    put:
+      operationId: regulartrainunit_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this regular train unit.
+        required: true
+      tags:
+      - regulartrainunit
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegularTrainUnit'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/RegularTrainUnit'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/RegularTrainUnit'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegularTrainUnit'
+          description: ''
+    patch:
+      operationId: regulartrainunit_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this regular train unit.
+        required: true
+      tags:
+      - regulartrainunit
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedRegularTrainUnit'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedRegularTrainUnit'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedRegularTrainUnit'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegularTrainUnit'
+          description: ''
+    delete:
+      operationId: regulartrainunit_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this regular train unit.
+        required: true
+      tags:
+      - regulartrainunit
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /api/sportsgroup/:
+    get:
+      operationId: sportsgroup_list
+      tags:
+      - sportsgroup
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SportsGroup'
+          description: ''
+    post:
+      operationId: sportsgroup_create
+      tags:
+      - sportsgroup
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SportsGroup'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/SportsGroup'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/SportsGroup'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SportsGroup'
+          description: ''
+  /api/sportsgroup/{id}/:
+    get:
+      operationId: sportsgroup_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this sports group.
+        required: true
+      tags:
+      - sportsgroup
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SportsGroup'
+          description: ''
+    put:
+      operationId: sportsgroup_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this sports group.
+        required: true
+      tags:
+      - sportsgroup
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SportsGroup'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/SportsGroup'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/SportsGroup'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SportsGroup'
+          description: ''
+    patch:
+      operationId: sportsgroup_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this sports group.
+        required: true
+      tags:
+      - sportsgroup
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedSportsGroup'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedSportsGroup'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedSportsGroup'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SportsGroup'
+          description: ''
+    delete:
+      operationId: sportsgroup_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this sports group.
+        required: true
+      tags:
+      - sportsgroup
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /api/trainer/:
+    get:
+      operationId: trainer_list
+      tags:
+      - trainer
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Trainer'
+          description: ''
+    post:
+      operationId: trainer_create
+      tags:
+      - trainer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Trainer'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Trainer'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Trainer'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trainer'
+          description: ''
+  /api/trainer/{id}/:
+    get:
+      operationId: trainer_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this trainer.
+        required: true
+      tags:
+      - trainer
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trainer'
+          description: ''
+    put:
+      operationId: trainer_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this trainer.
+        required: true
+      tags:
+      - trainer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Trainer'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Trainer'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Trainer'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trainer'
+          description: ''
+    patch:
+      operationId: trainer_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this trainer.
+        required: true
+      tags:
+      - trainer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedTrainer'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedTrainer'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedTrainer'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trainer'
+          description: ''
+    delete:
+      operationId: trainer_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this trainer.
+        required: true
+      tags:
+      - trainer
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /api/trainhour/:
+    get:
+      operationId: trainhour_list
+      tags:
+      - trainhour
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TrainHour'
+          description: ''
+    post:
+      operationId: trainhour_create
+      tags:
+      - trainhour
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TrainHour'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TrainHour'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TrainHour'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrainHour'
+          description: ''
+  /api/trainhour/{id}/:
+    get:
+      operationId: trainhour_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this train hour.
+        required: true
+      tags:
+      - trainhour
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrainHour'
+          description: ''
+    put:
+      operationId: trainhour_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this train hour.
+        required: true
+      tags:
+      - trainhour
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TrainHour'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TrainHour'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TrainHour'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrainHour'
+          description: ''
+    patch:
+      operationId: trainhour_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this train hour.
+        required: true
+      tags:
+      - trainhour
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedTrainHour'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedTrainHour'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedTrainHour'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrainHour'
+          description: ''
+    delete:
+      operationId: trainhour_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this train hour.
+        required: true
+      tags:
+      - trainhour
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /api/trainhourparticipation/:
+    get:
+      operationId: trainhourparticipation_list
+      tags:
+      - trainhourparticipation
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TrainHourParticipation'
+          description: ''
+    post:
+      operationId: trainhourparticipation_create
+      tags:
+      - trainhourparticipation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TrainHourParticipation'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TrainHourParticipation'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TrainHourParticipation'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrainHourParticipation'
+          description: ''
+  /api/trainhourparticipation/{id}/:
+    get:
+      operationId: trainhourparticipation_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this train hour participation.
+        required: true
+      tags:
+      - trainhourparticipation
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrainHourParticipation'
+          description: ''
+    put:
+      operationId: trainhourparticipation_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this train hour participation.
+        required: true
+      tags:
+      - trainhourparticipation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TrainHourParticipation'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/TrainHourParticipation'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/TrainHourParticipation'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrainHourParticipation'
+          description: ''
+    patch:
+      operationId: trainhourparticipation_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this train hour participation.
+        required: true
+      tags:
+      - trainhourparticipation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedTrainHourParticipation'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedTrainHourParticipation'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedTrainHourParticipation'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrainHourParticipation'
+          description: ''
+    delete:
+      operationId: trainhourparticipation_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this train hour participation.
+        required: true
+      tags:
+      - trainhourparticipation
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /api/users/:
+    get:
+      operationId: users_list
+      parameters:
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      tags:
+      - users
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+          description: ''
+    post:
+      operationId: users_create
+      tags:
+      - users
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/User'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/User'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+  /api/users/{id}/:
+    get:
+      operationId: users_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Benutzer.
+        required: true
+      tags:
+      - users
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+    put:
+      operationId: users_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Benutzer.
+        required: true
+      tags:
+      - users
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/User'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/User'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+    patch:
+      operationId: users_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Benutzer.
+        required: true
+      tags:
+      - users
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedUser'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedUser'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedUser'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+    delete:
+      operationId: users_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this Benutzer.
+        required: true
+      tags:
+      - users
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /api/users/get_emails/:
+    get:
+      operationId: users_get_emails_retrieve
+      tags:
+      - users
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+components:
+  schemas:
+    Department:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 255
+      required:
+      - id
+      - name
+    DepartmentLeadership:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        user:
+          type: integer
+        department:
+          type: integer
+      required:
+      - department
+      - id
+      - user
+    Membership:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        user:
+          type: integer
+        group:
+          type: integer
+      required:
+      - group
+      - id
+      - user
+    PatchedDepartment:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 255
+    PatchedDepartmentLeadership:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        user:
+          type: integer
+        department:
+          type: integer
+    PatchedMembership:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        user:
+          type: integer
+        group:
+          type: integer
+    PatchedRegularTrainUnit:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        group:
+          type: integer
+        weekday:
+          type: string
+          readOnly: true
+        start_time:
+          type: string
+          format: time
+        end_time:
+          type: string
+          format: time
+        place:
+          type: string
+          maxLength: 255
+    PatchedSportsGroup:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 255
+        active:
+          type: boolean
+        department:
+          type: integer
+    PatchedTrainHour:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        date:
+          type: string
+          format: date
+        start_time:
+          type: string
+          format: time
+        end_time:
+          type: string
+          format: time
+        place:
+          type: string
+          maxLength: 255
+        note:
+          type: string
+        group:
+          type: integer
+        trainer:
+          type: integer
+    PatchedTrainHourParticipation:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        user:
+          type: integer
+        hour:
+          type: integer
+    PatchedTrainer:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        user:
+          type: integer
+        group:
+          type: integer
+    PatchedUser:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        first_name:
+          type: string
+          title: Vorname
+          maxLength: 150
+        last_name:
+          type: string
+          title: Nachname
+          maxLength: 150
+        email:
+          type: string
+          format: email
+          title: E-Mail-Adresse
+          maxLength: 254
+        password:
+          type: string
+          writeOnly: true
+          title: Passwort
+          maxLength: 128
+        membership_number:
+          type: string
+          maxLength: 30
+        date_joined:
+          type: string
+          format: date-time
+          title: Mitglied seit
+        birthdate:
+          type: string
+          format: date
+          nullable: true
+    RegularTrainUnit:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        group:
+          type: integer
+        weekday:
+          type: string
+          readOnly: true
+        start_time:
+          type: string
+          format: time
+        end_time:
+          type: string
+          format: time
+        place:
+          type: string
+          maxLength: 255
+      required:
+      - end_time
+      - group
+      - id
+      - place
+      - start_time
+      - weekday
+    SportsGroup:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 255
+        active:
+          type: boolean
+        department:
+          type: integer
+      required:
+      - department
+      - id
+      - name
+    TrainHour:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        date:
+          type: string
+          format: date
+        start_time:
+          type: string
+          format: time
+        end_time:
+          type: string
+          format: time
+        place:
+          type: string
+          maxLength: 255
+        note:
+          type: string
+        group:
+          type: integer
+        trainer:
+          type: integer
+      required:
+      - date
+      - end_time
+      - group
+      - id
+      - place
+      - start_time
+      - trainer
+    TrainHourParticipation:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        user:
+          type: integer
+        hour:
+          type: integer
+      required:
+      - hour
+      - id
+      - user
+    Trainer:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        user:
+          type: integer
+        group:
+          type: integer
+      required:
+      - group
+      - id
+      - user
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        first_name:
+          type: string
+          title: Vorname
+          maxLength: 150
+        last_name:
+          type: string
+          title: Nachname
+          maxLength: 150
+        email:
+          type: string
+          format: email
+          title: E-Mail-Adresse
+          maxLength: 254
+        password:
+          type: string
+          writeOnly: true
+          title: Passwort
+          maxLength: 128
+        membership_number:
+          type: string
+          maxLength: 30
+        date_joined:
+          type: string
+          format: date-time
+          title: Mitglied seit
+        birthdate:
+          type: string
+          format: date
+          nullable: true
+      required:
+      - id
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid
