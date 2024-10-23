@@ -7,9 +7,9 @@
   </li>
 </ul>
 
-<input id="forname" type="text" [(ngModel)]="user.forname" placeholder="Vorname">
-<input id="lastname" type="text" [(ngModel)]="user.lastname" placeholder="Nachname">
+<input id="forname" type="text" [(ngModel)]="user.first_name" placeholder="Vorname">
+<input id="lastname" type="text" [(ngModel)]="user.last_name" placeholder="Nachname">
 <input id="email" type="email" [(ngModel)]="user.email" placeholder="email">
-<input id="date" type="date" [(ngModel)]="user.date">
+<input id="date" type="date" [(ngModel)]="user.birthdate">
 <button (click)="createUser()">Absenden</button>
 </div>

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ApiService } from './api.service';
+import { User } from './models/user';
 
 @Component({
   selector: 'app-root',
@@ -11,14 +12,9 @@ export class AppComponent {
 
   constructor(private apiService: ApiService) {}
 
-  public users: any[] = [];
+  public users: User[] = [];
 
-  public user: any = {
-    forname: '',
-    lastname: '',
-    email: '',
-    date: '',
-  };
+  public user: User = {first_name: '', last_name: '', birthdate: new Date, email: ''};
 
   ngOnInit(): void {
     this.getUsers();
@@ -26,7 +22,7 @@ export class AppComponent {
 
   getUsers(): void {
     this.apiService.getUsers().subscribe(
-      (response) => {
+      (response: User[]) => {
         this.users = response;
         console.log('API response: ', response);
       },
