@@ -8,6 +8,10 @@ __pycache__
 myvenv/
 venv/
 .venv/
+bin/
+lib/
+lib64
+pyvenv.cfg
 
 # Datenbank
 db.sqlite3
