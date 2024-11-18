@@ -1,8 +1,11 @@
 # How to Start Backend Services
+You need a python installation.
+It is recommended to use a virtual environment for this project that depedencies don't collide with other projects.
+We tested the project with python version 3.12.7.
 
 - Go to tgo-services-backend folder
-- ```source .venv/bin/activate``` to activate virtual environment in commandline
 - ```pip install -r requirements.txt```
+- ```python manage.py makemigrations```
 - ```python manage.py migrate``` to create Database
 - ```python manage.py runserver```
 

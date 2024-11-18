@@ -32,7 +32,7 @@ class Weekday(Enum):
 class SportsGroup(models.Model):
     name = models.CharField(max_length=255)
     active = models.BooleanField(default=True)
-    department = models.ForeignKey(Department, on_delete=models.PROTECT)
+    department = models.ForeignKey(Department, default=1, on_delete=models.PROTECT)
 
 
 class Membership(models.Model):
