@@ -10,5 +10,13 @@ import { Component, Input } from '@angular/core';
 })
 export class DayComponent {
   @Input() day = 0;
-
+  hidden = false;
+  ngOnInit() {
+    if (this.day == -1) {
+      this.hidden = true
+    }
+    else {
+      this.hidden = false
+    }
+  }
 }
