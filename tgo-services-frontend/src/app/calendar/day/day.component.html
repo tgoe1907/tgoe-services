@@ -1,6 +1,3 @@
-<div [hidden]="hidden"> {{ day }}
-    <ol>
-        <li>Item 1</li>
-        <li>Item 2</li>
-    </ol>
+<div [hidden]="hidden" class="day-style>"> {{ day }}
+    <app-appointment [hidden]="appointmentHidden" [position]="position" ></app-appointment>
 </div>

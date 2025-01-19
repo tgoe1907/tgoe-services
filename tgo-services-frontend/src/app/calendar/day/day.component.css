@@ -1,0 +1,16 @@
+.appointment {
+    background-color: black;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.day-style {
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    color: black;
+    display: block;
+    font-size: xx-large;
+}

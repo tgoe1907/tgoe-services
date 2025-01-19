@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { DayComponent } from '../day/day.component';
 import { NgFor } from '@angular/common';
 
@@ -11,8 +11,23 @@ import { NgFor } from '@angular/common';
 })
 export class WeekComponent {
   @Input() week: number[] = [1,2,3,4,5,6,7]
+  appointmentHidden = true;
+  position = { top: '0px', left: '0px' };
+  @ViewChild(DayComponent) day!: DayComponent;
 
-  handleClick(day: number): void {
-    console.log(day)
+
+  createAppointment(event: MouseEvent) {
+    this.appointmentHidden = !this.appointmentHidden;
+    this.day.appointmentHidden = this.appointmentHidden;
+    if (!this.appointmentHidden) {
+      const button = event.target as HTMLElement;
+      const rect = button.getBoundingClientRect();
+      console.log(rect.bottom + window.scrollY)
+      console.log(rect.left + window.scrollX)
+      this.position = {
+        top: `${rect.top + window.scrollY}px`,
+        left: `${rect.left + window.scrollX}px`,
+      }
+    }
   }
 }
