@@ -4,11 +4,11 @@ import { NgFor } from '@angular/common';
 import { eachDayOfInterval, endOfMonth, format } from 'date-fns';
 
 @Component({
-  selector: 'app-month',
-  standalone: true,
-  imports: [WeekComponent, NgFor],
-  templateUrl: './month.component.html',
-  styleUrls: ['./month.component.css']
+    selector: 'app-month',
+    imports: [WeekComponent],
+    standalone: true,
+    templateUrl: './month.component.html',
+    styleUrls: ['./month.component.css']
 })
 export class MonthComponent {
   month = [[1,2,3,4,5,6,7], [8,9,10,11,12,13,14], [15,16,17,18,19,20,21], [22,23,24,25,26,27,28]];
