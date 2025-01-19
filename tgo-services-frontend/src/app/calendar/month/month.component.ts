@@ -38,7 +38,7 @@ export class MonthComponent {
   updateMonthList(year: number, month: number): void {
     const start = new Date(year, month, 1);
     const end = endOfMonth(start)
-    console.log(eachDayOfInterval({start, end}).map((date) => format(date, 'dd')))
+    console.log(eachDayOfInterval({start, end}).map((date) => format(date, 'yyyy-MM-dd')))
   }
 
 }
