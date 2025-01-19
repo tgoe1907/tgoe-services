@@ -1,0 +1,11 @@
+<div class="calendar-control">
+    <div class="control-element" (click)="prev()">prev</div>
+    <div class="control-element">{{active_month}}</div>
+    <div class="control-element" (click)="next()">next</div>
+</div>
+<div class="calendar-week title-line">
+    <div *ngFor="let weekday of weekdays" class="calendar-day">{{weekday}}</div>
+</div>
+<div class="calendar-weeks">
+    <app-week *ngFor="let week of month" [week]="week"></app-week>
+</div>

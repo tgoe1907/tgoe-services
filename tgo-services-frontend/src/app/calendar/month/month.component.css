@@ -1,0 +1,13 @@
+.calendar-control {
+    display: flex;
+    box-sizing: border-box;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.control-element {
+    width: 100px; /* Feste Breite für die Boxen */
+    text-align: center;
+    padding: 10px;
+  }

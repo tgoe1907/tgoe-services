@@ -1,1 +1,34 @@
-/* You can add global styles to this file, and also import other style files */
+.calendar-week {
+    display: flex;
+    box-sizing: border-box;
+    width: 100%;
+    height: 160px;
+    object-fit: contain;
+}
+
+.title-line {
+    height: 20px;
+}
+
+
+.calendar-day:last-child {
+    border-right: 1px solid;
+}
+
+.calendar-weeks:last-child {
+    border-bottom: 1px solid;
+}
+
+.calendar-day {
+    box-sizing: border-box;
+    width: 17%;
+    background-color: rgba(0, 0, 0, 0.2);
+    text-align: center;
+    border-left: 1px solid;
+    border-top: 1px solid;
+}
+
+.calendar-day:hover {
+    background-color: rgba(0, 0, 0, 0.25);
+}
+

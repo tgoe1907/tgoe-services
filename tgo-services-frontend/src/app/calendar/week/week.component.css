@@ -1,0 +1,8 @@
+
+.box {
+    max-width: 14%;
+    min-width: 100px;
+    min-height: 100px;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.4);
+}
