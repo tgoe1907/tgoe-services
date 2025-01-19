@@ -4,7 +4,7 @@ import { NgFor } from '@angular/common';
 
 @Component({
     selector: 'app-week',
-    imports: [DayComponent],
+    imports: [DayComponent, NgFor],
     standalone: true,
     templateUrl: './week.component.html',
     styleUrls: ['./week.component.css']

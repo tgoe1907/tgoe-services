@@ -5,7 +5,7 @@ import { eachDayOfInterval, endOfMonth, format } from 'date-fns';
 
 @Component({
     selector: 'app-month',
-    imports: [WeekComponent],
+    imports: [WeekComponent, NgFor],
     standalone: true,
     templateUrl: './month.component.html',
     styleUrls: ['./month.component.css']
