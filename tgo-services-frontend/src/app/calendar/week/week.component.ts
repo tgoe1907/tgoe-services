@@ -1,33 +1,26 @@
 import { Component, Input, ViewChild } from '@angular/core';
 import { DayComponent } from '../day/day.component';
 import { NgFor } from '@angular/common';
+import { AppointmentService } from '../appointment.service';
+import { CurrentMonthService } from '../current-month.service';
+import { Overlay, OverlayRef } from '@angular/cdk/overlay';
+import { PortalModule } from '@angular/cdk/portal';
 
 @Component({
     selector: 'app-week',
-    imports: [DayComponent, NgFor],
+    imports: [DayComponent, NgFor, PortalModule],
     standalone: true,
     templateUrl: './week.component.html',
     styleUrls: ['./week.component.css']
 })
 export class WeekComponent {
-  @Input() week: number[] = [1,2,3,4,5,6,7]
-  appointmentHidden = true;
-  position = { top: '0px', left: '0px' };
+  constructor(private appointmentService: AppointmentService, private calendar: CurrentMonthService, private overlay: Overlay) { }
   @ViewChild(DayComponent) day!: DayComponent;
+  @Input() week: number[] = [1,2,3,4,5,6,7]
 
-
-  createAppointment(event: MouseEvent) {
-    this.appointmentHidden = !this.appointmentHidden;
-    this.day.appointmentHidden = this.appointmentHidden;
-    if (!this.appointmentHidden) {
-      const button = event.target as HTMLElement;
-      const rect = button.getBoundingClientRect();
-      console.log(rect.bottom + window.scrollY)
-      console.log(rect.left + window.scrollX)
-      this.position = {
-        top: `${rect.top + window.scrollY}px`,
-        left: `${rect.left + window.scrollX}px`,
-      }
-    }
+  openAppointmentView() {
+    const overlayRef = this.overlay.create();
+    //overlayRef.attach();
   }
+
 }

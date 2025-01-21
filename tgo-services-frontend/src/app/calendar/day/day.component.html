@@ -1,3 +1,6 @@
-<div [hidden]="hidden" class="day-style>"> {{ day }}
-    <app-appointment [hidden]="appointmentHidden" [position]="position" ></app-appointment>
+<div class="daystyle>" (click)="createAppointment(day)"> 
+    <div [hidden]="hidden">{{ day }}</div>
 </div>
+<ng-template cdkPortal>
+    <app-appointment [day]="day" [month]="month" [year]="year"></app-appointment>
+</ng-template>

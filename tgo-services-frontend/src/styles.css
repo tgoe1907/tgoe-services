@@ -1,9 +1,12 @@
+@import '@angular/cdk/overlay-prebuilt.css';
+
 .calendar-week {
     display: flex;
     box-sizing: border-box;
     width: 100%;
     height: 160px;
     object-fit: contain;
+    z-index: 1;
 }
 
 .title-line {
@@ -22,13 +25,13 @@
 .calendar-day {
     box-sizing: border-box;
     width: 17%;
-    background-color: rgba(0, 0, 0, 0.2);
-    text-align: center;
     border-left: 1px solid;
     border-top: 1px solid;
+    pointer-events: auto;
+    z-index: 1;
+    position: relative;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.2);
 }
 
-.calendar-day:hover {
-    background-color: rgba(0, 0, 0, 0.25);
-}
 
