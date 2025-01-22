@@ -5,8 +5,16 @@
     box-sizing: border-box;
 }
 
+.box {
+    width: 100%;
+}
 
-div {
+.entries {
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.daystyle {
     box-sizing: border-box;
     width: 100%;
     height: 100%;
@@ -14,9 +22,10 @@ div {
     font-size: xx-large;
     z-index: 10;
     background-color: rgb(158, 158, 158);
+    display: flex;
     text-align: center;
 }
 
-div:hover {
+.daystyle:hover {
     background-color: rgba(0,0,0,0.3);
 }

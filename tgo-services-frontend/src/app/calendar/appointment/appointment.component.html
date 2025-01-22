@@ -1,7 +1,23 @@
 <div class="appointment-box">
     <div class="appointment-content">
-        <input type="date" value="{{display_year}}-{{display_month}}-{{display_day}}">
-        <input type="datetime">
-        <input type="datetime">
+        <div class="block">
+            <input type="date" value="{{display_year}}-{{display_month}}-{{display_day}}">
+        </div>
+        <div class="block">
+            <p>Start</p>
+            <input type="time">
+        </div>
+        <div class="block">
+            <p>Ende </p>
+            <input type="time">
+        </div>
+        <div class="block">
+           <select>
+                <option *ngFor="let group of group_list" value="{{group.name}}">{{group.name}}</option>
+           </select>
+        </div>
+        <div class="block">
+            <button>Speichern</button>
+        </div>
     </div>
 </div>

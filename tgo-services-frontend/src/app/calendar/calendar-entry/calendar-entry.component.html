@@ -1,0 +1,6 @@
+<div class="entry" (click)="showCalendarEntry()">
+    {{trainHour.group.name}}
+</div>
+<ng-template cdkPortal>
+    <app-appointment [day]="trainHour.date.getDate()" [month]="trainHour.date.getMonth()+1" [year]="trainHour.date.getFullYear()"></app-appointment>
+</ng-template>

@@ -1,6 +1,10 @@
-<div class="daystyle>" (click)="createAppointment(day)"> 
-    <div [hidden]="hidden">{{ day }}</div>
+<div class="daystyle" (click)="createAppointment(day)"> 
+    <div [hidden]="hidden" class="box">{{ day }}
+        <div class="entries">
+            <app-calendar-entry *ngFor="let entry of train_hours" [trainHour]="entry"></app-calendar-entry>
+        </div>
+    </div>
 </div>
 <ng-template cdkPortal>
-    <app-appointment [day]="day" [month]="month" [year]="year"></app-appointment>
+    <app-appointment [day]="day" [month]="month+1" [year]="year"></app-appointment>
 </ng-template>
