@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
 import { WeekComponent } from '../week/week.component';
 import { NgFor } from '@angular/common';
-import { eachDayOfInterval, endOfMonth, format, getDay } from 'date-fns';
-import { forEach } from '@angular-devkit/schematics';
+import { format } from 'date-fns';
 import { CurrentMonthService } from '../current-month.service';
 import { AppointmentService } from '../appointment.service';
-import { DayComponent } from '../day/day.component';
 
 @Component({
     selector: 'app-month',
@@ -16,9 +14,7 @@ import { DayComponent } from '../day/day.component';
 })
 export class MonthComponent {
 
-  constructor(private currentCalendar: CurrentMonthService, private appointmentService: AppointmentService) {
-    
-  }
+  constructor(private currentCalendar: CurrentMonthService, private appointmentService: AppointmentService) { }
   ngOnInit() {
     const currentDate = new Date()
     const currentYear = parseInt(format(currentDate, 'yyyy'));
@@ -29,7 +25,7 @@ export class MonthComponent {
   }
 
   get month_list() {
-    return this.currentCalendar.month_list;
+    return this.currentCalendar.monthList;
   }
 
   get weekdays() {
@@ -37,7 +33,7 @@ export class MonthComponent {
   }
 
   get days_of_month() {
-    return this.currentCalendar.days_of_month;
+    return this.currentCalendar.daysOfMonth;
   }
 
   get month() {
@@ -55,7 +51,6 @@ export class MonthComponent {
       this.currentCalendar.year--;
     }
     this.updateMonthList(this.currentCalendar.year, this.currentCalendar.month);
-    DayComponent.overlayRef.detach();
     this.appointmentService.active = false;
   }
 
@@ -67,7 +62,6 @@ export class MonthComponent {
       this.currentCalendar.year++;
     }
     this.updateMonthList(this.currentCalendar.year, this.currentCalendar.month);
-    DayComponent.overlayRef.detach();
     this.appointmentService.active = false;
   }
 

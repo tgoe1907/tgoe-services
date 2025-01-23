@@ -1,32 +1,68 @@
 import { Component, Input } from '@angular/core';
 import { CurrentMonthService } from '../current-month.service';
 import { AppointmentService } from '../appointment.service';
-import { SportGroupsService } from 'src/app/sport-groups.service';
-import { NgFor } from '@angular/common';
+import { SportGroupsService } from 'src/app/services/sport-groups.service';
+import { NgFor, NgIf } from '@angular/common';
 import { TrainHour } from 'src/app/models/train-hour';
+import { FormsModule } from '@angular/forms';
+import { TrainingHoursService } from 'src/app/services/training-hours.service';
 
 @Component({
   selector: 'app-appointment',
-  imports: [NgFor],
+  imports: [NgFor, FormsModule],
   templateUrl: './appointment.component.html',
   styleUrl: './appointment.component.css'
 })
 export class AppointmentComponent {
-  @Input() day!: number;
-  @Input() month!: number;
-  @Input() year!: number;
-  //@Input() trainHour: TrainHour;
-  constructor(private calender: CurrentMonthService, appointment: AppointmentService, private group_service: SportGroupsService) {
+  @Input() date: Date | null = null;
+  @Input() trainHour: TrainHour | null = null;
+  constructor(private calender: CurrentMonthService, appointment: AppointmentService, 
+    private groupService: SportGroupsService, private trainHourService: TrainingHoursService) {}
+  displayDay!: string;
+  displayMonth!: string;
+  displayYear!: string;
+  startTime!: string;
+  endTime!: string
+  groupList = this.groupService.getDictAsList();
+  groupId!: number;
 
-  }
   ngOnInit() {
-    this.display_day = this.day >= 10 ? this.day.toString() : "0" + this.day.toString();
-    this.display_month = this.month >= 10 ? this.month.toString() : "0" + this.month.toString();
-    this.display_year = this.year.toString();
-  }
-  display_day!: string;
-  display_month!: string;
-  display_year!: string;
-  group_list = this.group_service.sport_group_list;
+    if (this.date != null) {
+      this.prepare_date_data(this.date)
+    } 
+    if (this.trainHour != null) {
+      this.prepare_date_data(this.trainHour.date)
+      this.startTime = this.trainHour.start;
+      this.endTime = this.trainHour.end;
+      this.groupId = this.trainHour.group.id;
+    }
 
+  }
+  
+  prepare_date_data(date: Date) {
+    const month = date.getMonth() + 1;
+    this.displayDay = date.getDate() >= 10 ? date.getDate().toString() : "0" + date.getDate().toString();
+    this.displayMonth = month >= 10 ? month.toString() : "0" + month.toString();
+    this.displayYear = date.getFullYear().toString();
+  }
+
+  safe_data(date: string, start_time: string, end_time: string, group_id: string) {
+    console.log(date)
+    console.log(start_time)
+    console.log(end_time)
+    console.log(group_id)
+    if (this.trainHour == null) {
+      const group = this.groupService.getGroupById(parseInt(group_id));
+      const newDate = new Date(date);
+      const new_train_hour = new TrainHour(-1, group, newDate, start_time, end_time);
+      this.trainHourService.addTrainHour(new_train_hour);
+    } else {
+      this.trainHour.group = this.groupService.getGroupById(parseInt(group_id));
+      this.trainHour.start = start_time;
+      this.trainHour.end = end_time;
+      this.trainHour.date = new Date(date);
+      this.trainHourService.updateTrainHour(this.trainHour);
+    }
+
+  }
 }

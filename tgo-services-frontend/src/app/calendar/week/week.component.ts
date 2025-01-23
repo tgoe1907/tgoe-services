@@ -18,9 +18,4 @@ export class WeekComponent {
   @ViewChild(DayComponent) day!: DayComponent;
   @Input() week: number[] = [1,2,3,4,5,6,7]
 
-  openAppointmentView() {
-    const overlayRef = this.overlay.create();
-    //overlayRef.attach();
-  }
-
 }

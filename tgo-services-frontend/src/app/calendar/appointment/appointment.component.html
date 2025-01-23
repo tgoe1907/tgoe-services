@@ -1,23 +1,23 @@
 <div class="appointment-box">
     <div class="appointment-content">
         <div class="block">
-            <input type="date" value="{{display_year}}-{{display_month}}-{{display_day}}">
+            <input type="date" value="{{displayYear}}-{{displayMonth}}-{{displayDay}}" #inputDate>
         </div>
         <div class="block">
             <p>Start</p>
-            <input type="time">
+            <input type="time" value="{{startTime}}" #inputStartTime>
         </div>
         <div class="block">
             <p>Ende </p>
-            <input type="time">
+            <input type="time" value="{{endTime}}" #inputEndTime>
         </div>
         <div class="block">
-           <select>
-                <option *ngFor="let group of group_list" value="{{group.name}}">{{group.name}}</option>
+           <select [(ngModel)]="groupId" #inputGroupName>
+                <option *ngFor="let group of groupList" value="{{group.id}}" [selected]="group.id === groupId">{{group.name}}</option>
            </select>
         </div>
         <div class="block">
-            <button>Speichern</button>
+            <button (click)="safe_data(inputDate.value, inputStartTime.value, inputEndTime.value, inputGroupName.value)">Speichern</button>
         </div>
     </div>
 </div>

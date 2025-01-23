@@ -16,12 +16,11 @@ export class CalendarEntryComponent {
   @ViewChild(CdkPortal) portal!: CdkPortal;
   overlayRef: OverlayRef | null = null;
   
-
-  
   constructor(  private overlay: Overlay, private appointmentService: AppointmentService) {}
 
 
-  showCalendarEntry() {
+  showCalendarEntry(event: MouseEvent) {
+    event.stopPropagation();
     const positionStrategy = this.overlay.position().global().centerHorizontally().centerVertically(); 
     this.overlayRef = this.overlay.create({positionStrategy,
       hasBackdrop: true

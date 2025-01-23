@@ -15,12 +15,12 @@ export class CurrentMonthService {
     this.month = currentMonth;
     this.updateCalendar(currentYear, currentMonth);
   }
-  days_of_month = [[1,2,3,4,5,6,7], [8,9,10,11,12,13,14], [15,16,17,18,19,20,21], [22,23,24,25,26,27,28]];
+  daysOfMonth = [[1,2,3,4,5,6,7], [8,9,10,11,12,13,14], [15,16,17,18,19,20,21], [22,23,24,25,26,27,28]];
   weekdays = ["MO", "DI", "MI", "DO", "FR", "SA", "SO"];
-  full_weekdays = ["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag"];
-  month_list = ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"]
-  month = 1;
-  year = 2025
+  fullWeekdays = ["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag"];
+  monthList = ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"]
+  month: number;
+  year: number
 
   getWeekday(date: Date) {
     var weekday = getDay(date) -1
@@ -31,7 +31,7 @@ export class CurrentMonthService {
   }
 
   updateCalendar(year: number, month: number): void {
-    this.days_of_month = [];
+    this.daysOfMonth = [];
     const start = new Date(year, month, 1);
     const end = endOfMonth(start)
     const day_list_string = eachDayOfInterval({start, end}).map((date) => format(date, 'dd'))
@@ -46,7 +46,7 @@ export class CurrentMonthService {
         week.push(i)
       } else {
         weekday_start = 0;
-        this.days_of_month.push(week);
+        this.daysOfMonth.push(week);
         week = [i];
       }
       weekday_start++;
@@ -54,7 +54,7 @@ export class CurrentMonthService {
     while(week.length < 7) {
       week.push(-1);
     }
-    this.days_of_month.push(week)
+    this.daysOfMonth.push(week)
     
   }
 }
