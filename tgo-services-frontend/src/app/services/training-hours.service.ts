@@ -37,10 +37,16 @@ export class TrainingHoursService {
     this.train_hours[trainHour.id] = trainHour; // Beispiel für eine ID als Schlüssel
     this.trainHoursSubject.next(Object.values(this.train_hours)); // Alle Werte erneut ausgeben
   }
+
   addTrainHour(trainHour: TrainHour) {
     const newId = this.getNewId();
     trainHour.id = newId;
     this.train_hours[newId] = trainHour;
+    this.trainHoursSubject.next(Object.values(this.train_hours)); // Alle Werte erneut ausgeben
+  }
+
+  deleteTrainHour(trainHour: TrainHour) {
+    delete this.train_hours[trainHour.id]
     this.trainHoursSubject.next(Object.values(this.train_hours)); // Alle Werte erneut ausgeben
   }
 

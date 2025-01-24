@@ -43,9 +43,6 @@ export class DayComponent {
     this.year = this.calendarService.year;
     this.date = new Date(this.calendarService.year, this.calendarService.month, this.day);
     this.trainHours$ = this.trainHourService.selectOnDate(this.date);
-    this.trainHours$.subscribe(data => {
-      console.log('Empfangene Daten für das Datum:', this.date, data);
-    });
   }
 
 

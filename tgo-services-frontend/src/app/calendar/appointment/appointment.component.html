@@ -18,6 +18,8 @@
         </div>
         <div class="block">
             <button (click)="safe_data(inputDate.value, inputStartTime.value, inputEndTime.value, inputGroupName.value)">Speichern</button>
+            <button *ngIf="trainHour" (click)="delete_entry()">Löschen</button>
         </div>
+
     </div>
 </div>

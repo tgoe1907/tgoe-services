@@ -9,7 +9,7 @@ import { TrainingHoursService } from 'src/app/services/training-hours.service';
 
 @Component({
   selector: 'app-appointment',
-  imports: [NgFor, FormsModule],
+  imports: [NgFor, NgIf, FormsModule],
   templateUrl: './appointment.component.html',
   styleUrl: './appointment.component.css'
 })
@@ -63,6 +63,11 @@ export class AppointmentComponent {
       this.trainHour.date = new Date(date);
       this.trainHourService.updateTrainHour(this.trainHour);
     }
+  }
 
+  delete_entry() {
+    if (this.trainHour != null) {
+      this.trainHourService.deleteTrainHour(this.trainHour);
+    }
   }
 }
