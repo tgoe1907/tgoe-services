@@ -47,10 +47,6 @@ export class AppointmentComponent {
   }
 
   safe_data(date: string, start_time: string, end_time: string, group_id: string) {
-    console.log(date)
-    console.log(start_time)
-    console.log(end_time)
-    console.log(group_id)
     if (this.trainHour == null) {
       const group = this.groupService.getGroupById(parseInt(group_id));
       const newDate = new Date(date);

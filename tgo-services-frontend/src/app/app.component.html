@@ -1,1 +1,3 @@
-<app-month></app-month>
+
+<app-month *ngIf="authenticated$ | async"></app-month>
+<app-login-page *ngIf="!(authenticated$ | async)"></app-login-page>

@@ -21,7 +21,7 @@ def authenticate_user(request):
     if not token:
         raise AuthenticationFailed("Unauthenticated!")        
     try:
-        payload = jwt.decode(token, TEMP_SECRET, algorithms="HS256")
+        payload = jwt.decode(token[2:-1].encode(), TEMP_SECRET, algorithms="HS256")
     except jwt.ExpiredSignatureError:
         raise AuthenticationFailed("Unauthenticated!")
     user = User.objects.filter(id=payload['id']).first()

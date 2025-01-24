@@ -24,8 +24,6 @@ export class TrainingHoursService {
   }
     
   isSameDay(date1: Date, date2: Date): boolean {
-    console.log("LOGGING")
-    console.log(date1);
     return (
       date1.getFullYear() === date2.getFullYear() &&
       date1.getMonth() === date2.getMonth() &&

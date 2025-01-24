@@ -13,16 +13,19 @@ router.register(f'regulartrainunit', RegularTrainUnitViewSet, basename='RegularT
 router.register(f'trainhour', TrainHourViewSet, basename='TrainHourViewSet')
 router.register(f'departmentleadership', DepartmentLeaderShipViewSet, basename='DepartmentLeaderShip')
 router.register(f'trainhourparticipation', TrainHourParticipationViewSet, basename='TrainHourParticipation')
-urlpatterns = router.urls
-'''
+
+apiViewPatterns = [
+    path('register/', RegisterUserView.as_view(), name='api-view'),
+    path('login/', LoginUserView.as_view(), name='api-view'),
+    path('user/', GetUserView.as_view(), name='api-view'),
+    path('update/', UpdateUserView.as_view(), name='api-view'),
+    path('logout/', LogoutUserView.as_view(), name='api-view'),
+    path('', include(router.urls), name='api-view'),
+]
 urlpatterns = [
-    path('register/', RegisterUserView.as_view()),
-    path('login/', LoginUserView.as_view()),
-    path('user/', GetUserView.as_view()),
-    path('update/', UpdateUserView.as_view()),
-    path('logout/', LogoutUserView.as_view()),
     path('', include(router.urls)),
+    *apiViewPatterns
 ]
 
-urlpatterns = format_suffix_patterns(urlpatterns)
-'''
+# urlpatterns = format_suffix_patterns(urlpatterns)
+
