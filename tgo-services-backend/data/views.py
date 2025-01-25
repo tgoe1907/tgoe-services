@@ -55,7 +55,11 @@ class LoginUserView(APIView):
 
         token = jwt.encode(payload, TEMP_SECRET, algorithm='HS256')
         response = Response() 
-        response.set_cookie(key='jwt', value=token, httponly=True)  #httonly - frontend can't access cookie, only for backend
+        response.set_cookie(key='jwt', 
+                            value=token, 
+                            httponly=True, 
+                            samesite='None', 
+                            secure=True)  #production True
         response.data = {'jwt token': token}
 
         return response
@@ -65,6 +69,18 @@ class GetUserView(APIView):
         user = authenticate_user(request=request)
         serializer = UserSerializer(user)
         return Response(serializer.data)
+
+class IsAuthenticated(APIView):
+    def get(self, request):
+        token = request.COOKIES.get('jwt')
+        if not token:
+            return Response({'authenticated': False})        
+        try:
+            payload = jwt.decode(token[2:-1].encode(), TEMP_SECRET, algorithms="HS256")
+            return Response({'authenticated': True})
+        except jwt.ExpiredSignatureError:
+            return Response({'authenticated': False})
+
 
 class UpdateUserView(APIView):
     def post(self, request):

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
@@ -8,8 +9,11 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
   styleUrl: './login-page.component.css'
 })
 export class LoginPageComponent {
-  constructor(private authService: AuthenticationService) {}
-  login(email: string, password:string) {
-    this.authService.login(email, password);
+  constructor(private authService: AuthenticationService, private router: Router) {}
+  async login(email: string, password:string) {
+    const isLoggedIn = await this.authService.login(email, password);
+    if (isLoggedIn) {
+      this.router.navigate(['/main']);
+    }
   }
 }

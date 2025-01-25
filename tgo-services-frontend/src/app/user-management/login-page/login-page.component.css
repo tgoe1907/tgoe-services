@@ -1,0 +1,22 @@
+.container {
+    box-sizing: border-box;
+    text-align: center;
+    margin-top: 10%;
+}
+.credential-input {
+    text-align: center;
+    box-sizing: border-box;
+}
+
+button {
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.password-reset {
+    font-size: smaller;
+    color: rgb(0, 0, 255);
+}
+.password-reset:hover {
+    color: rgba(0, 26, 255, 0.664);
+}

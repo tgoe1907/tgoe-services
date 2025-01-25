@@ -13,12 +13,9 @@ import { LoginPageComponent } from './user-management/login-page/login-page.comp
 export class AppComponent {
   title = 'tgo-services-frontend';
 
-  constructor(private apiService: ApiService, private authService: AuthenticationService) {}
-  authenticated = this.authService
-  authenticated$: Observable<boolean> = of(false);
+  constructor(private apiService: ApiService) {}
   
   ngOnInit(): void {
-    this.authenticated$ = this.authService.isAuthenticated();
   }
 
 }

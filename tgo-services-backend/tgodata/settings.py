@@ -144,7 +144,7 @@ SPECTACULAR_SETTINGS = {
 
 CORS_ALLOW_ALL_ORIGINS = False  
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:4200",  # Angular development server
+    "http://127.0.0.1:4200",  # Angular development server
 ]
 
 CORS_ALLOW_METHODS = [

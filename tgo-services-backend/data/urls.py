@@ -18,6 +18,7 @@ apiViewPatterns = [
     path('register/', RegisterUserView.as_view(), name='api-view'),
     path('login/', LoginUserView.as_view(), name='api-view'),
     path('user/', GetUserView.as_view(), name='api-view'),
+    path('authenticated/', IsAuthenticated.as_view(), name='api-view'),
     path('update/', UpdateUserView.as_view(), name='api-view'),
     path('logout/', LogoutUserView.as_view(), name='api-view'),
     path('', include(router.urls), name='api-view'),

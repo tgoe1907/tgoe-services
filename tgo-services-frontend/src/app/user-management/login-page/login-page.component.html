@@ -1,11 +1,15 @@
-<div>
-    <div>
-        <p>Email</p>
-        <input type="text" #email>
-    </div>
-    <div>
-        <p>Password</p>
-        <input type="text" #password>
-    </div>
+<div class="container">
+    <h1>Willkommen auf der TGÖ Services Seite</h1>
+    <h2>Hier einloggen</h2>
+        <div class="credential-input">
+            <p>Email</p>
+            <input type="email" #email>
+        </div>
+        <div class="credential-input"> 
+            <p>Password</p>
+            <input type="password" #password>
+        </div>
     <button (click)="login(email.value, password.value)">Login</button>
+    <button>Registrieren</button>
+    <a class="password-reset">Passwort zurücksetzen</a>
 </div>
