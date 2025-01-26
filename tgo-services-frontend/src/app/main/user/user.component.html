@@ -1,0 +1,25 @@
+<app-navigation></app-navigation>
+<div>
+    <div>
+        <div>Vorname</div>
+        <input type="text" [(ngModel)]="user.first_name" #first_name>
+    </div>
+    <div>
+        <div>Nachname</div>
+        <input type="text" [(ngModel)]="user.last_name" #last_name>
+    </div>
+    <div>
+        <div>Email</div>
+        <input type="text" [(ngModel)]="user.email" #email>
+    </div>
+    <div>
+        <div>Geburtstag</div>
+        <input type="date" [(ngModel)]="user.birthdate" #birthdate>
+    </div>
+    <div>
+        <div>Passwort ändern</div>
+        <input type="password" value="">
+        <input type="password" value="">
+    </div>
+    <button (click)="safe()">Speichern</button>
+</div>

@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { ApiService } from './api.service';
 import { AuthenticationService } from './services/authentication.service';
 import { Observable, of } from 'rxjs';
 import { LoginPageComponent } from './user-management/login-page/login-page.component';
@@ -13,7 +12,7 @@ import { LoginPageComponent } from './user-management/login-page/login-page.comp
 export class AppComponent {
   title = 'tgo-services-frontend';
 
-  constructor(private apiService: ApiService) {}
+  constructor() {}
   
   ngOnInit(): void {
   }

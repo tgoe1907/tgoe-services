@@ -2,17 +2,18 @@ import { Injectable } from '@angular/core';
 import { User } from '../models/user';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, firstValueFrom } from 'rxjs';
+import { ApiService } from './api.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
 
-  private apiUrl = 'http://127.0.0.1:8000/api/';
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private apiService: ApiService) { }
   user: User | null = null;
   private authenticated = false;  
   //private authenticatedSubject = new BehaviorSubject<boolean>(false);
+  private apiUrl = this.apiService.getAPIUrl();
   
 
   async isAuthenticated() {

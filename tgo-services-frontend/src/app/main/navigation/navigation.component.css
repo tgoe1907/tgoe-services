@@ -1,0 +1,62 @@
+/* Grundstil für die Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+    position: relative;
+  }
+  
+  .nav-links {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .nav-links li {
+    margin: 0 15px;
+  }
+  
+  .nav-links a {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+  }
+  
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+  }
+  
+  .hamburger .bar {
+    width: 30px;
+    height: 3px;
+    margin: 5px;
+    background-color: white;
+  }
+  
+  /* Responsive Design für das Hamburger-Menü */
+  @media (max-width: 768px) {
+    .nav-links {
+      position: absolute;
+      top: 60px;
+      right: 0;
+      background-color: #333;
+      width: 100%;
+      text-align: center;
+      display: none;
+      flex-direction: column;
+    }
+  
+    .nav-links.show-menu {
+      display: flex;
+    }
+  
+    .hamburger {
+      display: flex;
+    }
+  }

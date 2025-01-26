@@ -1,1 +1,13 @@
-<p>navigation works!</p>
+<div class="navbar">
+    <div class="hamburger" (click)="toggleMenu()">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+    <ul [ngClass]="{'show-menu': showMenu}" class="nav-links">
+        <li><a routerLink="/main" routerLinkActive="active">Übungsleiter Stunden</a></li>
+        <li><a routerLink="/gruppen" routerLinkActive="active">Mein Gruppen</a></li>
+        <li><a routerLink="/daten" routerLinkActive="active">Meine Daten</a></li>
+        <li><a (click)="logout()">Logout</a></li>
+    </ul>
+</div>
