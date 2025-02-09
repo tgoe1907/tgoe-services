@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { TrainHour } from '../models/train-hour';
 import { SportGroupsService } from './sport-groups.service';
 import { Observable, of, from, BehaviorSubject, map } from 'rxjs';
-
+import { ApiService } from './api.service';
+import { HttpClient } from '@angular/common/http';
 type TrainHourDictionary = {
   [key: number]: TrainHour;
 };
@@ -12,16 +13,23 @@ type TrainHourDictionary = {
   providedIn: 'root'
 })
 export class TrainingHoursService {
-  constructor(private sportsGroupService: SportGroupsService ) {
+  private apiUrl = this.apiService.getAPIUrl();
+  constructor(private sportsGroupService: SportGroupsService, private apiService: ApiService, private http: HttpClient) {
     this.trainHoursSubject.next(Object.values(this.train_hours)); 
+    this.getTrainHours(1).subscribe(arr => {
+      const output: any = JSON.parse(arr.toString());
+      output.forEach((element: any) => {
+        element.date = new Date(element.date)
+        const hour = TrainHour.fromJson(element);
+        this.train_hours[hour.id] = hour;
+      });
+      this.trainHoursSubject.next(Object.values(this.train_hours));
+      console.log(this.train_hours)
+    })
   }
   maxId = 10000;
   private trainHoursSubject = new BehaviorSubject<TrainHour[]>([]);
-  private train_hours: TrainHourDictionary = {
-    0: new TrainHour(0, this.sportsGroupService.getGroupById(0), new Date(2025, 0, 23), "18:30", "20:00"),
-    1: new TrainHour(1, this.sportsGroupService.getGroupById(1), new Date(2025, 0, 20), "18:00", "19:30"),
-    2: new TrainHour(2, this.sportsGroupService.getGroupById(0), new Date(2025, 0, 20), "19:30", "21:00")
-  }
+  private train_hours: TrainHourDictionary = {}
     
   isSameDay(date1: Date, date2: Date): boolean {
     return (
@@ -41,6 +49,14 @@ export class TrainingHoursService {
     trainHour.id = newId;
     this.train_hours[newId] = trainHour;
     this.trainHoursSubject.next(Object.values(this.train_hours)); // Alle Werte erneut ausgeben
+    let data = JSON.parse(JSON.stringify(trainHour))
+    data['trained_by'] = [data['trained_by']]
+    data['date'] = data['date'].substring(0, 10)
+    const response = this.http.post(`${this.apiUrl}trainhour/`, 
+      data, {withCredentials: true})
+    response.subscribe(res => {
+      console.log(res)
+    })
   }
 
   deleteTrainHour(trainHour: TrainHour) {
@@ -64,5 +80,10 @@ export class TrainingHoursService {
     return this.maxId;
   }
 
+  getTrainHours(id: number) {
+    const data = {'user_id': id};
+    return this.http.post(`${this.apiUrl}trainhour/get_trainhour_by_user/`, 
+      data, {withCredentials: true})
+  }
 
 }

@@ -6,6 +6,7 @@ import { NgFor, NgIf } from '@angular/common';
 import { TrainHour } from 'src/app/models/train-hour';
 import { FormsModule } from '@angular/forms';
 import { TrainingHoursService } from 'src/app/services/training-hours.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-appointment',
@@ -17,7 +18,8 @@ export class AppointmentComponent {
   @Input() date: Date | null = null;
   @Input() trainHour: TrainHour | null = null;
   constructor(private calender: CurrentMonthService, appointment: AppointmentService, 
-    private groupService: SportGroupsService, private trainHourService: TrainingHoursService) {}
+    private groupService: SportGroupsService, private trainHourService: TrainingHoursService,
+    private userService: UserService) {}
   displayDay!: string;
   displayMonth!: string;
   displayYear!: string;
@@ -32,9 +34,9 @@ export class AppointmentComponent {
     } 
     if (this.trainHour != null) {
       this.prepare_date_data(this.trainHour.date)
-      this.startTime = this.trainHour.start;
-      this.endTime = this.trainHour.end;
-      this.groupId = this.trainHour.group.id;
+      this.startTime = this.trainHour.start_time;
+      this.endTime = this.trainHour.end_time;
+      this.groupId = this.trainHour.group;
     }
 
   }
@@ -48,14 +50,14 @@ export class AppointmentComponent {
 
   safe_data(date: string, start_time: string, end_time: string, group_id: string) {
     if (this.trainHour == null) {
-      const group = this.groupService.getGroupById(parseInt(group_id));
       const newDate = new Date(date);
-      const new_train_hour = new TrainHour(-1, group, newDate, start_time, end_time);
+      const userId = this.userService.user.id;
+      const new_train_hour = new TrainHour(-1, newDate, start_time, end_time, "BWH", parseInt(group_id), userId);
       this.trainHourService.addTrainHour(new_train_hour);
     } else {
-      this.trainHour.group = this.groupService.getGroupById(parseInt(group_id));
-      this.trainHour.start = start_time;
-      this.trainHour.end = end_time;
+      this.trainHour.group = parseInt(group_id);
+      this.trainHour.start_time = start_time;
+      this.trainHour.end_time = end_time;
       this.trainHour.date = new Date(date);
       this.trainHourService.updateTrainHour(this.trainHour);
     }

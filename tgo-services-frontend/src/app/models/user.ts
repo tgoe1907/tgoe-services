@@ -1,7 +1,7 @@
 
 
 export class User {
-    id?: number;
+    id: number;
     membership_number?: number;
     first_name: string;
     last_name: string;

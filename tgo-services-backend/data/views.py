@@ -7,19 +7,23 @@ from rest_framework.response import Response
 from rest_framework import status, viewsets, filters
 from rest_framework.views import APIView
 from rest_framework.exceptions import AuthenticationFailed
-from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import action
-
+from .permissions import *
 from datetime import datetime, timezone, timedelta
 import jwt
+import json
 # Create your views here.
 
 TEMP_SECRET = "Tempoary Secret Change for Production!"
 
+invalid_cookie_dict = {}
+
 def authenticate_user(request):
     token = request.COOKIES.get('jwt')
     if not token:
-        raise AuthenticationFailed("Unauthenticated!")        
+        raise AuthenticationFailed("Unauthenticated!")    
+    if token in invalid_cookie_dict.keys():
+        raise AuthenticationFailed("Unauthenticated!")    
     try:
         payload = jwt.decode(token[2:-1].encode(), TEMP_SECRET, algorithms="HS256")
     except jwt.ExpiredSignatureError:
@@ -91,8 +95,13 @@ class UpdateUserView(APIView):
 
 
 class LogoutUserView(APIView):
-    def post(self, request):
+    def get(self, request):
         response = Response()
+        token = request.COOKIES.get('jwt')
+        if not token:
+            response.data = {'message': 'not successful'}
+            return response
+        invalid_cookie_dict[token] = "invalid"
         response.delete_cookie('jwt')
         response.data = {'message': 'successful'}
 
@@ -101,7 +110,7 @@ class LogoutUserView(APIView):
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    #permission_classes = [IsAuthenticated]
+    permission_classes = [Authenticated]
     filter_backends = [filters.SearchFilter]
     search_fields = ['first_name', 'last_name', 'membership_number', 'email', 'id']
 
@@ -110,45 +119,29 @@ class UserViewSet(viewsets.ModelViewSet):
         email = User.objects.values_list('email', flat=True)
 
         return Response(email)
-    
-class TrainerViewSet(viewsets.ModelViewSet):
-    queryset = Trainer.objects.all()
-    serializer_class = TrainerSerializer
-    #permission_classes = []
 
 class DepartmentViewSet(viewsets.ModelViewSet):
     queryset = Department.objects.all()
     serializer_class = DepartmentSerializer
-    #permission_classes = []
+    permission_classes = [Authenticated, IsAdmin]
+
 
 class SportsGroupViewSet(viewsets.ModelViewSet):
     queryset = SportsGroup.objects.all()
     serializer_class = SportsGroupSerializer
-    #permission_classes = []
-    
+    permission_classes = [Authenticated]
 
-class MembershipViewSet(viewsets.ModelViewSet):
-    queryset = Membership.objects.all()
-    serializer_class = MembershipSerializer
-    #permission_classes = []
-
-
-class RegularTrainUnitViewSet(viewsets.ModelViewSet):
-    queryset = RegularTrainUnit.objects.all()
-    serializer_class = RegularTrainUnitSerializer
-    #permission_classes = []
 
 class TrainHourViewSet(viewsets.ModelViewSet):
     queryset = TrainHour.objects.all()
     serializer_class = TrainHourSerializer
-    #permission_classes = []
+    #permission_classes = [Authenticated]
+    
+    @action(detail=False, methods=['post'])
+    def get_trainhour_by_user(self, request, pk=None):
+        id = request.data['user_id']
+        user = User.objects.get(id=id)
+        train_hours = TrainHour.objects.filter(trained_by=user)
+        serializer = TrainHourSerializer(train_hours, many=True)
 
-
-class DepartmentLeaderShipViewSet(viewsets.ModelViewSet):
-    queryset = DepartmentLeaderShip.objects.all()
-    serializer_class = DepartmentLeadershipSerializer
-    #permission_classes = []
-
-class TrainHourParticipationViewSet(viewsets.ModelViewSet):
-    queryset = TrainHourParticipation.objects.all()
-    serializer_class = TrainHourParticipationSerializer
+        return Response(json.dumps(serializer.data))

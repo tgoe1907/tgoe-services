@@ -14,10 +14,10 @@ export class SportGroupsService {
 
   constructor(private departmentService: DepartmentService) { }
   private sport_group_dict: SportsGroupDictionary = {
-    0: new SportsGroup(0, "Parkour 16+", this.departmentService.departments[0]),
-    1: new SportsGroup(1, "Parkour Jugend", this.departmentService.departments[0]),
-    2: new SportsGroup(2, "Parkour Kids+", this.departmentService.departments[0]),
-    3: new SportsGroup(3, "Volleyball 1 Herren", this.departmentService.departments[1]),
+    1: new SportsGroup(1, "Parkour 16+", this.departmentService.departments[0]),
+    2: new SportsGroup(2, "Parkour Jugend", this.departmentService.departments[0]),
+    3: new SportsGroup(3, "Parkour Kids+", this.departmentService.departments[0]),
+    4: new SportsGroup(4, "Volleyball 1 Herren", this.departmentService.departments[1]),
   };
   
   getDictAsList() {

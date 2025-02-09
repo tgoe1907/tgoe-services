@@ -10,16 +10,25 @@ import { ApiService } from './api.service';
 export class AuthenticationService {
 
   constructor(private http: HttpClient, private apiService: ApiService) { }
-  user: User | null = null;
+  private user: User | null = null;
   private authenticated = false;  
   //private authenticatedSubject = new BehaviorSubject<boolean>(false);
   private apiUrl = this.apiService.getAPIUrl();
-  
+
+  getAuthenticatedUser() {
+    return this.user;
+  }
 
   async isAuthenticated() {
     try {
       var answer = await firstValueFrom(this.http.get<Record<string, any>>(`${this.apiUrl}authenticated/`, {withCredentials: true}));
-      console.log(answer);
+      //console.log(answer);
+      this.http.get<Record<string, any>>(`${this.apiUrl}user/`, {withCredentials: true}).subscribe(
+        user => {
+          this.user = new User(user['id'], user['first_name'], user['last_name'], user['birthdate'], user['email'], 
+            user['membership_number'], user['date_joined']);
+        }
+      )
       return answer['authenticated'];
     } catch (error) {
       return false
@@ -30,6 +39,11 @@ export class AuthenticationService {
     const data = {"email": email, "password": password};
     try {
       var answer = await firstValueFrom(this.http.post(`${this.apiUrl}login/`, data, {withCredentials: true}));
+      this.http.get<Record<string, any>>(`${this.apiUrl}user/`, {withCredentials: true}).subscribe(
+        user => {
+          console.log(user)
+        }
+      )
       if ('jwt token' in answer){
         this.authenticated = true;    
         return true;

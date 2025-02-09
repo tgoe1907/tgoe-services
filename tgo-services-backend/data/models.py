@@ -6,27 +6,8 @@ from django.contrib.auth.models import AbstractUser
 from rest_enumfield import EnumField
 
 
-
-class User(AbstractUser):
-    membership_number = models.CharField(max_length=30, blank=True)
-    birthdate = models.DateField(max_length=8, null=True, blank=True)
-
-
-    def __str__(self):
-        return self.first_name + " " + self.last_name
-
 class Department(models.Model):
     name = models.CharField(max_length=255)
-
-class Weekday(Enum):
-    MONDAY = "Montag"
-    TUESDAY = "Dienstag"
-    WEDNESDAY = "Mittwoch"
-    THURSDAY = "Donnerstag"
-    FRIDAY = "Freitag"
-    SATURDAY = "Samstag"
-    SUNDAY = "Sonntag"
-
 
 
 class SportsGroup(models.Model):
@@ -34,22 +15,16 @@ class SportsGroup(models.Model):
     active = models.BooleanField(default=True)
     department = models.ForeignKey(Department, default=1, on_delete=models.PROTECT)
 
+class User(AbstractUser):
+    membership_number = models.CharField(max_length=30, blank=True)
+    birthdate = models.DateField(null=True, blank=True)
+    department_manager = models.ManyToManyField(Department, related_name="managers", blank=True)
+    trainer_of = models.ManyToManyField(SportsGroup, related_name="trainers", blank=True)
+    participate_at = models.ManyToManyField(SportsGroup, related_name="participants", blank=True)
+    admin = models.BooleanField(default=False)
 
-class Membership(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    group = models.ForeignKey(SportsGroup, on_delete=models.CASCADE)
-
-class Trainer(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    group = models.ForeignKey(SportsGroup, on_delete=models.CASCADE)
-
-class RegularTrainUnit(models.Model):
-    group = models.ForeignKey(SportsGroup, on_delete=models.CASCADE)
-    weekday = EnumField(Weekday)
-    start_time = models.TimeField()
-    end_time = models.TimeField()
-    place = models.CharField(max_length=255)
-
+    def __str__(self):
+        return self.first_name + " " + self.last_name
 
 class TrainHour(models.Model):
     date = models.DateField()
@@ -58,17 +33,5 @@ class TrainHour(models.Model):
     place = models.CharField(max_length=255)
     note = models.TextField(blank=True)
     group = models.ForeignKey(SportsGroup, on_delete=models.PROTECT)
-    trainer = models.ForeignKey(Trainer, on_delete=models.PROTECT)
-
-
-class TrainHourParticipation(models.Model):
-    user = models.ForeignKey(User, on_delete=models.PROTECT)
-    hour = models.ForeignKey(TrainHour, on_delete=models.CASCADE)
-
-class DepartmentLeaderShip(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    department = models.ForeignKey(Department, on_delete=models.CASCADE)
-
-
-class Admin(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    trained_by = models.ManyToManyField(User, related_name="trainer")
+    participants = models.ManyToManyField(User, related_name="participant", blank=True)

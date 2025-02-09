@@ -4,6 +4,7 @@ import { Component, Input, ViewChild } from '@angular/core';
 import { TrainHour } from 'src/app/models/train-hour';
 import { AppointmentService } from '../appointment.service';
 import { AppointmentComponent } from '../appointment/appointment.component';
+import { SportGroupsService } from 'src/app/services/sport-groups.service';
 
 @Component({
   selector: 'app-calendar-entry',
@@ -15,9 +16,12 @@ export class CalendarEntryComponent {
   @Input() trainHour!: TrainHour;  
   @ViewChild(CdkPortal) portal!: CdkPortal;
   overlayRef: OverlayRef | null = null;
-  
-  constructor(  private overlay: Overlay, private appointmentService: AppointmentService) {}
+  group_name: string = ""
+  constructor(private overlay: Overlay, private appointmentService: AppointmentService, private groupService: SportGroupsService) {}
 
+  ngOnInit() {
+    this.group_name = this.groupService.getGroupById(this.trainHour.group).name
+  }
 
   showCalendarEntry(event: MouseEvent) {
     event.stopPropagation();

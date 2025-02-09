@@ -1,5 +1,5 @@
 <div class="entry" (click)="showCalendarEntry($event)">
-    {{trainHour.group.name}}
+    {{group_name}}
 </div>
 <ng-template cdkPortal>
     <app-appointment [trainHour]="trainHour"></app-appointment>

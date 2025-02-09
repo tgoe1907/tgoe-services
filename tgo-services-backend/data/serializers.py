@@ -4,7 +4,8 @@ from .models import *
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'first_name', 'last_name', 'email', 'password', 'membership_number', 'date_joined', 'birthdate']
+        fields = ['id', 'first_name', 'last_name', 'email', 'password', 
+        'membership_number', 'date_joined', 'birthdate', "admin", "department_manager", "trainer_of", "participate_at"]
 
         extra_kwargs = {'password': {'write_only': True, 'required': False}}
     
@@ -12,12 +13,21 @@ class UserSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         validated_data['username'] = validated_data['email']
         password = validated_data.pop('password', None)
-        instance = self.Meta.model(**validated_data) #doesnt include password
+        departments = validated_data.pop('department_manager', [])
+        trainer_of = validated_data.pop('trainer_of', [])
+        participate_at = validated_data.pop('participate_at', [])
+        user = User.objects.create(**validated_data) #doesnt include password
 
         if password is not None:
-            instance.set_password(password) #hashes password
-        instance.save()
-        return instance
+            user.set_password(password) #hashes password
+        if trainer_of is not []:
+            user.trainer_of.set(trainer_of)
+        if participate_at is not []:
+            user.participate_at.set(participate_at)
+        if departments is not []:
+            user.department_manager.set(departments)
+        user.save()
+        return user
 
     def update(self, instance, validated_data):
         password = None
@@ -29,11 +39,6 @@ class UserSerializer(serializers.ModelSerializer):
         instance.save()
         return {'message': 'succesfull updated'}
 
-class TrainerSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Trainer
-        fields = ['id', 'user', 'group']
-
 class SportsGroupSerializer(serializers.ModelSerializer):
     class Meta:
         model = SportsGroup
@@ -44,27 +49,7 @@ class DepartmentSerializer(serializers.ModelSerializer):
         model = Department
         fields = ['id', 'name']
 
-class MembershipSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Membership
-        fields = ['id', 'user', 'group']
-
-class RegularTrainUnitSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = RegularTrainUnit
-        fields = ['id', 'group', 'weekday', 'start_time', 'end_time', 'place']
-
 class TrainHourSerializer(serializers.ModelSerializer):
     class Meta:
         model = TrainHour
-        fields = ['id', 'date', 'start_time', 'end_time', 'place', 'note', 'group', 'trainer']
-
-class DepartmentLeadershipSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = DepartmentLeaderShip
-        fields = ['id', 'user', 'department']
-
-class TrainHourParticipationSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = TrainHourParticipation
-        fields = ['id', 'user', 'hour']
+        fields = ['id', 'date', 'start_time', 'end_time', 'place', 'note', 'group', 'trained_by', 'participants']

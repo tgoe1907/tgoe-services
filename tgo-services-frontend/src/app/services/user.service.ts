@@ -8,29 +8,35 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class UserService {
-
-  constructor(private apiService: ApiService, private http: HttpClient) { }
+  user = new User(-1, "", "", new Date(), "")
+  constructor(private apiService: ApiService, private http: HttpClient) { 
+      this.getUser().then(user => {
+        this.user = user;
+      });  
+  }
   private apiUrl: string = this.apiService.getAPIUrl(); 
 
-  async getUser() {
+  async getUser(): Promise<User> {
     try {
-          var answer = await firstValueFrom(this.http.get<Record<string, any>>(`${this.apiUrl}user/`, {withCredentials: true}));
-          return User.fromJson(answer);
+      const response = await firstValueFrom(this.http.get(`${this.apiUrl}user/`, {withCredentials: true}));
+      if (!response) {
+        throw new Error('Could not get user');
+      }
+      const user: User = await User.fromJson(response);
+      return user;
     } catch (error) {
-          return null
+      throw new Error(`Error fetching user: ${error}`);
     }
   }
+
+  getUser2() {
+    return this.http.get<User>(`${this.apiUrl}user/`, {withCredentials: true});
+  }
+  
   updateUser(user: User) {
     const response = this.http.post<any>(
       `${this.apiUrl}update/`, user, { headers: { 'Content-Type': 'application/json' }, withCredentials: true }
     ).toPromise();
     return response;
   }
-  // getUsers(): Observable<User[]> {
-  //   return this.http.get<User[]>(`${this.apiUrl}/users/`);
-  // }
-
-  // createUser(user: any): Observable<any> {
-  //   return this.http.post<any>(`${this.apiUrl}/users/`, user)
-  // }
 }
