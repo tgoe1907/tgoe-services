@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { TrainHour } from '../models/train-hour';
+import { TrainHour, TrainHourInterface } from '../models/train-hour';
 import { SportGroupsService } from './sport-groups.service';
 import { Observable, of, from, BehaviorSubject, map } from 'rxjs';
 import { ApiService } from './api.service';
@@ -40,28 +40,38 @@ export class TrainingHoursService {
   }
 
   updateTrainHour(trainHour: TrainHour): void {
-    this.train_hours[trainHour.id] = trainHour; // Beispiel für eine ID als Schlüssel
-    this.trainHoursSubject.next(Object.values(this.train_hours)); // Alle Werte erneut ausgeben
+    console.log(trainHour)
+    this.http.put<TrainHourInterface>(`${this.apiUrl}trainhour/${trainHour.id}/`, 
+      trainHour, {withCredentials: true}).subscribe(
+        answer => {
+          console.log(answer)
+          this.train_hours[trainHour.id] = trainHour; // Beispiel für eine ID als Schlüssel
+          this.trainHoursSubject.next(Object.values(this.train_hours)); // Alle Werte erneut ausgeben
+        }
+      )
   }
 
   addTrainHour(trainHour: TrainHour) {
-    const newId = this.getNewId();
-    trainHour.id = newId;
-    this.train_hours[newId] = trainHour;
-    this.trainHoursSubject.next(Object.values(this.train_hours)); // Alle Werte erneut ausgeben
     let data = JSON.parse(JSON.stringify(trainHour))
     data['trained_by'] = [data['trained_by']]
     data['date'] = data['date'].substring(0, 10)
-    const response = this.http.post(`${this.apiUrl}trainhour/`, 
+    const response = this.http.post<TrainHourInterface>(`${this.apiUrl}trainhour/`, 
       data, {withCredentials: true})
     response.subscribe(res => {
-      console.log(res)
+      trainHour.id = res.id;
+      this.train_hours[res.id] = trainHour;
+      this.trainHoursSubject.next(Object.values(this.train_hours)); 
     })
   }
 
   deleteTrainHour(trainHour: TrainHour) {
-    delete this.train_hours[trainHour.id]
-    this.trainHoursSubject.next(Object.values(this.train_hours)); // Alle Werte erneut ausgeben
+    this.http.delete(`${this.apiUrl}trainhour/${trainHour.id}/`, {withCredentials: true}).subscribe(
+      answer => {
+        delete this.train_hours[trainHour.id]
+        this.trainHoursSubject.next(Object.values(this.train_hours)); // Alle Werte erneut ausgeben
+      }
+    )
+
   }
 
   selectOnDate(date: Date): Observable<TrainHour[]> {

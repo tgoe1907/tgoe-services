@@ -25,7 +25,7 @@ export class SportGroupsService {
   }
 
   getGroupById(id: number) {
-    if (id in Object.keys(this.sport_group_dict)) {
+    if (Object.keys(this.sport_group_dict).includes(id.toString())) {
       return this.sport_group_dict[id];
     } else {
       throw Error("Index not in dict sports_group_dict")
