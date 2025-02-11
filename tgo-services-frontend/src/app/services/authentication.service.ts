@@ -54,4 +54,15 @@ export class AuthenticationService {
       return false;
     }
   }
+
+
+  logout() {
+    try {
+      console.log("Logout")
+      return this.http.get(`${this.apiUrl}logout/`, {withCredentials: true});
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
+  }
 }
