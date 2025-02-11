@@ -40,9 +40,11 @@ export class TrainingHoursService {
   }
 
   updateTrainHour(trainHour: TrainHour): void {
-    console.log(trainHour)
+    let data = JSON.parse(JSON.stringify(trainHour))
+    delete data['id']
+    data['date'] = data['date'].substring(0, 10)
     this.http.put<TrainHourInterface>(`${this.apiUrl}trainhour/${trainHour.id}/`, 
-      trainHour, {withCredentials: true}).subscribe(
+      data, {withCredentials: true}).subscribe(
         answer => {
           console.log(answer)
           this.train_hours[trainHour.id] = trainHour; // Beispiel für eine ID als Schlüssel
