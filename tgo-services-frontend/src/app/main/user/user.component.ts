@@ -13,11 +13,11 @@ import { FormsModule } from '@angular/forms';
 })
 export class UserComponent {
   constructor(private userService: UserService) {
-    this.user = new User(-1, "", "", new Date(), "");  
+    this.user = new User(-1, "", "", new Date(), "", [], false, [], []);  
   }
   user: User;
   async ngOnInit(): Promise<void> {
-    this.user = await this.userService.getUser() || new User(-1, "", "", new Date(), "");  
+    this.user = await this.userService.getUser() || new User(-1, "", "", new Date(), "", [], false, [], []);  
   }
 
   safe() {

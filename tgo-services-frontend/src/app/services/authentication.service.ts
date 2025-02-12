@@ -26,6 +26,7 @@ export class AuthenticationService {
       this.http.get<Record<string, any>>(`${this.apiUrl}user/`, {withCredentials: true}).subscribe(
         user => {
           this.user = new User(user['id'], user['first_name'], user['last_name'], user['birthdate'], user['email'], 
+            user['department_manager'], user['admin'], user['trainer_of'], user['participate_at'],
             user['membership_number'], user['date_joined']);
         }
       )

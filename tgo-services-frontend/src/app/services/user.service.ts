@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class UserService {
-  user = new User(-1, "", "", new Date(), "")
+  user!: User;
   constructor(private apiService: ApiService, private http: HttpClient) { 
       this.getUser().then(user => {
         this.user = user;
