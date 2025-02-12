@@ -18,5 +18,6 @@ export class NavigationComponent {
   }
   logout() {
     this.authService.logout()?.subscribe(answer => console.log(answer));
+    window.location.reload();
   }
 }

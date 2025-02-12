@@ -4,6 +4,7 @@ import { SportGroupsService } from './sport-groups.service';
 import { Observable, of, from, BehaviorSubject, map } from 'rxjs';
 import { ApiService } from './api.service';
 import { HttpClient } from '@angular/common/http';
+import { UserService } from './user.service';
 type TrainHourDictionary = {
   [key: number]: TrainHour;
 };
@@ -14,20 +15,25 @@ type TrainHourDictionary = {
 })
 export class TrainingHoursService {
   private apiUrl = this.apiService.getAPIUrl();
-  constructor(private sportsGroupService: SportGroupsService, private apiService: ApiService, private http: HttpClient) {
+  constructor(private sportsGroupService: SportGroupsService, private apiService: ApiService, private http: HttpClient, private userService: UserService) {
     this.trainHoursSubject.next(Object.values(this.train_hours)); 
-    this.getTrainHours(1).subscribe(arr => {
-      const output: any = JSON.parse(arr.toString());
-      output.forEach((element: any) => {
-        element.date = new Date(element.date)
-        const hour = TrainHour.fromJson(element);
-        this.train_hours[hour.id] = hour;
-      });
-      this.trainHoursSubject.next(Object.values(this.train_hours));
-      console.log(this.train_hours)
+    this.initTrainHours()
+  }
+
+  initTrainHours() {
+    this.userService.getUser2().subscribe(user => {
+      this.getTrainHours(user.id).subscribe(arr => {
+        const output: any = JSON.parse(arr.toString());
+        output.forEach((element: any) => {
+          element.date = new Date(element.date)
+          const hour = TrainHour.fromJson(element);
+          this.train_hours[hour.id] = hour;
+        });
+        this.trainHoursSubject.next(Object.values(this.train_hours));
+      })
     })
   }
-  maxId = 10000;
+
   private trainHoursSubject = new BehaviorSubject<TrainHour[]>([]);
   private train_hours: TrainHourDictionary = {}
     
@@ -87,10 +93,6 @@ export class TrainingHoursService {
     );
   }
 
-  getNewId() {
-    this.maxId++;
-    return this.maxId;
-  }
 
   getTrainHours(id: number) {
     const data = {'user_id': id};

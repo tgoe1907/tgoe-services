@@ -16,10 +16,15 @@ type SportsGroupDictionary = {
 })
 export class SportGroupsService {
   private apiUrl = this.apiService.getAPIUrl();
+  initialized: boolean = false
   constructor(private departmentService: DepartmentService, private apiService: ApiService, 
     private http: HttpClient, private userService: UserService) { 
       this.sportGroupSubject.next(Object.values(this.sport_group_dict)); 
-      let groups = this.getGroupsOfTrainer()
+      this.initService()
+  }
+
+  initService() {
+    let groups = this.getGroupsOfTrainer()
       groups.subscribe(
         array => {
           array.forEach(
@@ -28,9 +33,11 @@ export class SportGroupsService {
             }
           )
           this.sportGroupSubject.next(Object.values(this.sport_group_dict)); 
+          this.initialized = true;
         }
       )
   }
+
   private sportGroupSubject = new BehaviorSubject<SportsGroup[]>([]);
   private sport_group_dict: SportsGroupDictionary = {};
   
